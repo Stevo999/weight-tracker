@@ -1,99 +1,107 @@
-function calculateBMI() {
-    const name = document.getElementById('nameInput').value.trim();
-    const age = parseInt(document.getElementById('ageInput').value, 10);
-    const height = parseInt(document.getElementById('heightInput').value, 10) / 100; // Convert to meters
-    const region = document.getElementById('regionInput').value.trim();
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+   }
 
-    if (name === '' || isNaN(age) || isNaN(height) || region === '') {
-        alert('Please fill in all fields.');
-        return;
-    }
-
-    // Prompt for weight and validate it
-    let weight = prompt('Please enter your weight in kg:');
-    weight = parseFloat(weight);
-
-    if (isNaN(weight) || weight <= 0) {
-        alert('Invalid weight value. Please enter a valid weight.');
-        return;
-    }
-
-    // Calculate BMI
-    const bmi = (weight / (height * height)).toFixed(2);
-    let recommendation = '';
-
-    if (bmi < 18.5) {
-        recommendation = 'Underweight - You should consider gaining some weight.';
-    } else if (bmi >= 18.5 && bmi < 24.9) {
-        recommendation = 'Normal weight - Keep up the good work!';
-    } else if (bmi >= 25 && bmi < 29.9) {
-        recommendation = 'Overweight - You should consider losing some weight.';
-    } else {
-        recommendation = 'Obese - You should consult a healthcare professional for advice.';
-    }
-
-    // Display result with recommended foods button
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">BMI Result for ${name}</h5>
-                <p class="card-text">Your BMI is: ${bmi}</p>
-                <p class="card-text">${recommendation}</p>
-                <p class="card-text">Region: ${region}</p>
-                ${getRecommendedFoodsButton(bmi)}
-            </div>
-        </div>
-    `;
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-function getRecommendedFoodsButton(bmi) {
-    if (bmi < 18.5 || bmi >= 30) {
-        // If underweight or obese, show the button with recommended foods
-        return `
-            <button class="btn btn-primary btn-block mt-3" onclick="showRecommendedFoods()">Recommended Foods</button>
-        `;
-    }
-    // Otherwise, don't show the button
-    return '';
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3498db;
 }
 
-function showRecommendedFoods() {
-    const foods = [
-        'For Underweight: Nuts, Avocado, Whole Grains, Dairy Products, Eggs, Lean Meats',
-        'For Obese: Fruits, Vegetables, Whole Grains, Lean Proteins, Nuts, Seeds',
-    ];
+.form-group label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+.form-group {
+    margin-bottom: 20px;
+}
 
-    let foodList = '';
-    foods.forEach(food => {
-        foodList += `<li>${food}</li>`;
-    });
+.form-row {
+    margin-top: 20px;
+}
 
-    const modalContent = `
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Recommended Foods</h5>
-            </div>
-            <div class="modal-body">
-                <ul>${foodList}</ul>
-            </div>
-        </div>
-    `;
+#nameInput,
+#ageInput,
+#heightInput,
+#regionInput {
+    width: 100%;
+}
 
-    // Create a modal (bootstrap)
-    const modal = document.createElement('div');
-    modal.classList.add('modal', 'fade');
-    modal.id = 'foodModal';
-    modal.tabIndex = '-1';
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-labelledby', 'foodModalLabel');
-    modal.innerHTML = modalContent;
 
-    document.body.appendChild(modal);
+#result {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+    color: #27ae60
+}
 
-    // Show the modal
-    const modalElement = new bootstrap.Modal(modal, {
-        backdrop: 'static',
-    });
-    modalElement.show();
+.card {
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #3498db;
+    border: none;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+.btn-primary:focus {
+    outline: none;
+}
+/* Styles for mobile phones (up to 767px) */
+@media (max-width: 767px) {
+    .card {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
 }
