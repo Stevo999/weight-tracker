@@ -9,6 +9,7 @@ function calculateBMI() {
         return;
     }
 
+    // Calculate BMI
     const bmi = (weight / (height * height)).toFixed(2);
     let recommendation = '';
 
@@ -22,6 +23,7 @@ function calculateBMI() {
         recommendation = 'Obese - You should consult a healthcare professional for advice.';
     }
 
+    // Display result
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
         <p>Hello ${name},</p>
