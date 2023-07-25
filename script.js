@@ -32,12 +32,16 @@ function calculateBMI() {
         recommendation = 'Obese - You should consult a healthcare professional for advice.';
     }
 
-    // Display result
+    // Display result in a card
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = `
-        <p>Hello ${name},</p>
-        <p>Your BMI is: ${bmi}</p>
-        <p>${recommendation}</p>
-        <p>Region: ${region}</p>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">BMI Result for ${name}</h5>
+                <p class="card-text">Your BMI is: ${bmi}</p>
+                <p class="card-text">${recommendation}</p>
+                <p class="card-text">Region: ${region}</p>
+            </div>
+        </div>
     `;
 }
