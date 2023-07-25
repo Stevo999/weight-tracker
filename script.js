@@ -9,6 +9,15 @@ function calculateBMI() {
         return;
     }
 
+    // Prompt for weight and validate it
+    let weight = prompt('Please enter your weight in kg:');
+    weight = parseFloat(weight);
+
+    if (isNaN(weight) || weight <= 0) {
+        alert('Invalid weight value. Please enter a valid weight.');
+        return;
+    }
+
     // Calculate BMI
     const bmi = (weight / (height * height)).toFixed(2);
     let recommendation = '';
